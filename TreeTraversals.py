@@ -94,6 +94,27 @@ class BinaryTree:
             next_queue = []
         return result
     
+    def reverse_levelOrder(self,root):
+        if root is None:
+            return []
+        queue = [root]
+        next_queue = []
+        level = []
+        result=[]
+        while queue != []:
+            for root in queue:
+                level.append(root.val)
+                if root.right is not None:
+                    next_queue.append(root.right)
+                if root.left is not None:
+                    next_queue.append(root.left)
+            for i in level:
+                result.append(i)
+            level = []
+            queue = next_queue
+            next_queue=[]
+        return result[::-1]
+    
 tree = BinaryTree(1)
 tree.root.left = Node(2)
 tree.root.right = Node(3)
@@ -112,6 +133,8 @@ print(tree.recursive_postorder(tree.root))
 print(tree.iterative_postorder(tree.root))
 
 print(tree.levelorder(tree.root))
+
+print(tree.reverse_levelOrder(tree.root))
 
 
 
